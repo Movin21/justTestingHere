@@ -11,18 +11,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AttendeeServlet
+ * Servlet implementation class updateAttendee
  */
-public class AttendeeServlet extends HttpServlet {
+public class updateAttendeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int attendeeId = Integer.parseInt(request.getParameter("attendeeId"));
 		String attendeeName = request.getParameter("attendeeName");
-		String address = request.getParameter("address");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
+		String address = request.getParameter("attendeeAddress");
+		String phone = request.getParameter("attendeePhone");
+		String email = request.getParameter("attendeeEmail");
 		int tickets = Integer.parseInt(request.getParameter("tickets"));
 		String previouslyAttendedEvents = request.getParameter("previouslyAttendedEvents");
 		String username = request.getParameter("username");
@@ -30,7 +35,7 @@ public class AttendeeServlet extends HttpServlet {
 
 		Attendee attendee = new Attendee(attendeeId, attendeeName, address, phone, email, tickets,
 				previouslyAttendedEvents, username, password);
-		boolean isTrue = AttendeeDBUtil.insertAttendee(attendee);
+		boolean isTrue = AttendeeDBUtil.updateAttendee(attendee);
 
 		PrintWriter out = response.getWriter();
 		if (isTrue == true) {
@@ -43,13 +48,13 @@ public class AttendeeServlet extends HttpServlet {
 			// Alert Success
 			// navigate to admin portal
 			response.setContentType("text/html");
-			out.println("<script type = 'text/javascript'> " + "alert('Atendee added successfully!');"
+			out.println("<script type = 'text/javascript'> " + "alert('Update successfull!');"
 					+ "location='adminPortal.jsp'</script>");
 		} else {
 			// Alert failed
 			// navigate to admin portal
 			response.setContentType("text/html");
-			out.println("<script type = 'text/javascript'> " + "alert('Insertion failed !');"
+			out.println("<script type = 'text/javascript'> " + "alert('Update failed !');"
 					+ "location='adminPortal.jsp'</script>");
 
 			List<Attendee> attendeeDetails = AttendeeDBUtil.getAttendee();
@@ -57,7 +62,6 @@ public class AttendeeServlet extends HttpServlet {
 
 			RequestDispatcher dis = request.getRequestDispatcher("/adminPortal.jsp");
 			dis.forward(request, response);
-
 		}
 	}
 }

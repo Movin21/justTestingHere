@@ -1,11 +1,13 @@
 package com.customer;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 
 
@@ -25,8 +27,14 @@ public class adminLoginServlet extends HttpServlet {
 		boolean isTrue=AdminDBUtil.validate(userName, password);
 		
 		if(isTrue==true) {
+			//attendee retreive
+			List<Attendee> attendeeDetails = AttendeeDBUtil.getAttendee();
+		    request.setAttribute("attendeeDetails", attendeeDetails);
+		    
+		    RequestDispatcher dis = request.getRequestDispatcher("/adminPortal.jsp");
+			dis.forward(request, response);
 			//navigate to admin portal
-			response.sendRedirect("adminPortal.jsp");
+			
 		}
 		else {
 			//Alert and redirect to the login page

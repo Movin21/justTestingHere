@@ -11,26 +11,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AttendeeServlet
+ * Servlet implementation class AttendeeDeleteServlet
  */
-public class AttendeeServlet extends HttpServlet {
+public class AttendeeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int attendeeId = Integer.parseInt(request.getParameter("attendeeId"));
-		String attendeeName = request.getParameter("attendeeName");
-		String address = request.getParameter("address");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		int tickets = Integer.parseInt(request.getParameter("tickets"));
-		String previouslyAttendedEvents = request.getParameter("previouslyAttendedEvents");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 
-		Attendee attendee = new Attendee(attendeeId, attendeeName, address, phone, email, tickets,
-				previouslyAttendedEvents, username, password);
-		boolean isTrue = AttendeeDBUtil.insertAttendee(attendee);
+		String username = request.getParameter("username");
+		boolean isTrue = AttendeeDBUtil.deleteAttendee(username);
 
 		PrintWriter out = response.getWriter();
 		if (isTrue == true) {
@@ -43,13 +37,13 @@ public class AttendeeServlet extends HttpServlet {
 			// Alert Success
 			// navigate to admin portal
 			response.setContentType("text/html");
-			out.println("<script type = 'text/javascript'> " + "alert('Atendee added successfully!');"
+			out.println("<script type = 'text/javascript'> " + "alert('Delete successful!');"
 					+ "location='adminPortal.jsp'</script>");
 		} else {
 			// Alert failed
 			// navigate to admin portal
 			response.setContentType("text/html");
-			out.println("<script type = 'text/javascript'> " + "alert('Insertion failed !');"
+			out.println("<script type = 'text/javascript'> " + "alert('Delete failed !');"
 					+ "location='adminPortal.jsp'</script>");
 
 			List<Attendee> attendeeDetails = AttendeeDBUtil.getAttendee();

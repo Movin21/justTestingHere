@@ -24,6 +24,19 @@ public class Attendee {
         this.username = username;
         this.password = password;
     }
+    
+    public Attendee(String attendeeId, String attendeeName, String attendeeAddress, String attendeePhone,
+            String attendeeEmail, String tickets, String previouslyAttendedEvents, String username, String password) {
+ this.attendeeId = Integer.parseInt(attendeeId);
+ this.attendeeName = attendeeName;
+ this.attendeeAddress = attendeeAddress;
+ this.attendeePhone = attendeePhone;
+ this.attendeeEmail = attendeeEmail;
+ this.tickets = Integer.parseInt(tickets);;
+ this.previouslyAttendedEvents = previouslyAttendedEvents;
+ this.username = username;
+ this.password = password;
+}
 
     // Getters and setters for all fields
 
