@@ -9,16 +9,16 @@
 </head>
 <body>
  <div class='adminLogin'>
-        <center>
+        
         <h1>Administrator Login</h1>
         <form action="adminLogin" method="post">
             <input type="text" Class="adminUsername" name="adminUsername" placeholder=" UserName"><br>
             <input type="text" Class="adminPassword" name="adminPassword" placeholder=" Password"><br>
             <button type="submit" name="adminLoginButton"Class="adminLoginButton">Log in</button>
-         </center> 
+        
         </form>
    
-        <div><img class="logologin" src="eventimage"></div>
+       	  <div><img class="logologin" src="eventimage"></div>
         
     </div>
 
